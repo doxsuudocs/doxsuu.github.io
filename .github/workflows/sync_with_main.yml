@@ -4,6 +4,9 @@ on:
   push:
     branches: test
 
+permissions:
+  contents: write
+  
 jobs:
   pull-main-into-test:
     runs-on: ubuntu-latest
