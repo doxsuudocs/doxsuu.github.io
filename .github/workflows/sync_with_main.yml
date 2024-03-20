@@ -3,24 +3,32 @@ name: Merge main into test
 on:
   push:
     branches:
-      - '*'
+      - main
 
 jobs:
   merge:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Use checkout v2
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}  # Add this line
+          ref: refs/heads/test
+          token: ${{ secrets.GITHUB_CI_TOKEN }}
 
-      - name: Merge main
+      - name: Merge main into test
         run: |
+          echo "# Config"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "${{ github.actor }}"
+          echo "# Fetch all"
+          git fetch --all
+          echo "# Checkout/pull main"
           git checkout main
           git pull
+          echo "# Checkout/pull test"
           git checkout test
-          git merge main --allow-unrelated-histories
-          git push
+          git pull
+          echo "# Merge"
+          git merge main -X theirs
+          echo "# Push"
+          git push origin test
