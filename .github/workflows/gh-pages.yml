@@ -11,7 +11,7 @@ jobs:
     - name: Create pull request
       uses: peter-evans/create-pull-request@v6
       with:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        git-token: ${{ secrets.TOKEN }}
         branch: ${{ github.ref }}
         base: main
         title: 'Auto PR: ${{ github.actor }}'
