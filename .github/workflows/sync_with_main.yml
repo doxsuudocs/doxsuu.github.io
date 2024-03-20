@@ -1,22 +1,26 @@
-name: Pull Request Handler
+name: Sync Back to Develop
 
 on:
   push:
-    branches: '*'
+    branches:
+      - '*'
 
 jobs:
-  create_pull_request:
+  sync-branches:
+    if: github.ref_name != 'main'
     runs-on: ubuntu-latest
+    name: Syncing branches
     steps:
-      - name: Checkout main branch
+      - name: Checkout
         uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
         with:
-          ref: main
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+          node-version: 12
+      - name: Opening pull request
+        id: pull
+        uses: tretuna/sync-branches@1.2.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
-          title: "Automatically created Pull Request"
-          body: "This Pull Request was automatically created in response to a new pull request being opened."
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: 'main'
+          TO_BRANCH: ${{ github.ref_name }}
