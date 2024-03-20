@@ -1,4 +1,4 @@
-name: Sync and PR on push to test branch
+name: Merge main into test
 
 on:
   push:
@@ -6,17 +6,18 @@ on:
       - '*'
 
 jobs:
-  sync_and_pr:
+  merge:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: main
           fetch-depth: 0
 
-      - name: Merge and push to test branch
+      - name: Merge main
         run: |
+          git checkout main
+          git pull
           git checkout test
-          git merge main --allow-unrelated-histories
-          git push origin test
+          git merge main
+          git push
