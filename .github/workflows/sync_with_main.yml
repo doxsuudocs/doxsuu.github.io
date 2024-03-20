@@ -16,10 +16,3 @@ jobs:
           git merge main --allow-unrelated-histories -m "Merge main into test"
           git push origin test
 
-      - name: Merge development -> staging
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: main
-          target_branch: test
-          github_token: ${{ secrets.GITHUB_TOKEN }}
