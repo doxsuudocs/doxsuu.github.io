@@ -2,7 +2,7 @@ name: Push to test branch
 
 on:
   push:
-    branches: test
+    branches: testz
 
 jobs:
   copy_changes:
