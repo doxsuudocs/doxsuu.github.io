@@ -1,0 +1,31 @@
+name: Merge to Test Branch
+
+on:
+  push:
+    branches:
+      - main
+      - 'test/*' # test 브랜치도 포함합니다.
+
+jobs:
+  merge_to_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Create and checkout test branch
+        run: |
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+          git checkout -b test
+          git push origin test
+        if: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Merge main into test
+        run: |
+          git fetch origin main
+          git merge --ff-only origin/main
+          git push origin test
+        if: ${{ github.ref == 'refs/heads/main' }}
