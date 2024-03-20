@@ -23,11 +23,12 @@ jobs: # 실행 작업 코드
 
       - name: Merge dev branch # main 브랜치에서 dev 브랜치를 merge
         run: |
-          git checkout -b test main
+          git checkout -b temp-branch main
           git merge test
           git checkout main
-          git merge test
-          git branch -d test
+          git merge temp-branch
+          git branch -d temp-branch
+
 
       - name: Push changes to main branch # merge 내용들을 main 브랜치로 최종 push
         uses: ad-m/github-push-action@master
