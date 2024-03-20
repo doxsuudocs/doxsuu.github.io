@@ -1,4 +1,4 @@
-name: Push to test branch
+name: Push to gh-pages branch
 
 on:
   push:
@@ -16,12 +16,12 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.TOKEN }}
 
-      - name: Push changes to test
+      - name: Push changes to gh-pages
         run: |
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "${{ github.actor }}"
           if [ "${{ github.ref }}" != "refs/heads/main" ]; then
-            git checkout testz
+            git checkout gh-pages
             git merge --allow-unrelated-histories main
-            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git testz
+            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
           fi
