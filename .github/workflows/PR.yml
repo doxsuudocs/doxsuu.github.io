@@ -2,8 +2,8 @@ name: Auto PR on new branch
 
 on:
   push:
-    branches-ignore:
-      - 'main'
+    branches:
+      - '*'
 
 jobs:
   createPullRequest:
