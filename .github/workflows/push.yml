@@ -2,7 +2,8 @@ name: Push to test branch
 
 on:
   push:
-    branches: testz
+    branches:
+      - '*'
 
 jobs:
   copy_changes:
@@ -19,6 +20,8 @@ jobs:
         run: |
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "${{ github.actor }}"
-          git checkout testz
-          git merge --allow-unrelated-histories main
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git testz
+          if [ "${{ github.ref }}" != "refs/heads/main" ]; then
+            git checkout testz
+            git merge --allow-unrelated-histories main
+            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git testz
+          fi
