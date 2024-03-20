@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
       - name: Merge main into test
         run: |
@@ -15,4 +17,3 @@ jobs:
           git pull
           git merge main --allow-unrelated-histories -m "Merge main into test"
           git push origin test
-
