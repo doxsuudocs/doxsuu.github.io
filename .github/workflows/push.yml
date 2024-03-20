@@ -23,5 +23,5 @@ jobs:
           if [ "${{ github.ref }}" != "refs/heads/main" ]; then
             git checkout gh-pages
             git merge --allow-unrelated-histories main
-            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
+            git push origin gh-pages
           fi
