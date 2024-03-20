@@ -1,0 +1,27 @@
+name: Auto PR on new branch
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  createPullRequest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Merge new branch into main
+          branch: ${{ github.head_ref }}
+          base: main
+          title: 'Auto PR: ${{ github.head_ref }}'
+          body: 'New branch ${{ github.head_ref }} was created. Merging into main.'
+          draft: false
