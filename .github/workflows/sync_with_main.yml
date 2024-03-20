@@ -22,13 +22,3 @@ jobs:
           git checkout test
           git merge main --allow-unrelated-histories
           git push origin test
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          branch: test
-          title: 'Update test from main'
-          body: 'This PR was auto-generated to sync the main and test branches.'
-          draft: false
