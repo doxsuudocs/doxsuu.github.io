@@ -2,7 +2,8 @@ name: Sync and PR on new branch
 
 on:
   push:
-    branches: test
+    branches: 
+     - test
     
 jobs:
   sync_and_pr:
