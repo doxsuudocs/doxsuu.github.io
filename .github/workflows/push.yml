@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - '*'
-
 jobs:
   copy_changes:
     runs-on: ubuntu-latest
