@@ -1,26 +1,23 @@
-name: Sync Back to Develop
+name: Sync Branch with Main
 
 on:
   push:
-    branches:
-      - '*'
+    branches-ignore:
+      - main # 메인 브랜치를 무시합니다.
 
 jobs:
-  sync-branches:
-    if: github.ref_name != 'main'
+  sync_with_main:
     runs-on: ubuntu-latest
-    name: Syncing branches
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Opening pull request
-        id: pull
-        uses: tretuna/sync-branches@1.2.0
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: 'main'
-          TO_BRANCH: ${{ github.ref_name }}
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Push to Main if Branch Changed
+      run: |
+        # 현재 브랜치를 가져옵니다.
+        current_branch=$(git branch --show-current)
+        
+        # 가져온 브랜치가 main이 아니라면 main에 변경사항을 푸시합니다.
+        if [ "$current_branch" != "main" ]; then
+          git push origin "$current_branch":main
+        fi
