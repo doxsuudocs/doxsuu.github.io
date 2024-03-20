@@ -1,21 +1,22 @@
-name: Sync Branch with Main
+name: Pull Request Handler
 
 on:
-  push:
-    branches:
-      - '*'
+  pull_request:
+    branches: '*'
 
 jobs:
-  sync_with_main:
+  create_pull_request:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
 
-    - name: Push to Main if Branch Changed
-      run: |
-        current_branch=$(git branch --show-current)
-        
-        if [ "$current_branch" != "main" ]; then
-          git push origin "$current_branch":main
-        fi
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          title: "Automatically created Pull Request"
+          body: "This Pull Request was automatically created in response to a new pull request being opened."
