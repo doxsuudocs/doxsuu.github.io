@@ -1,14 +1,21 @@
-name: Pull Request Handler
+name: Sync Branch with Main
 
 on:
   push:
-    branches: '*'
+    branches:
+      - '*'
 
 jobs:
-  create_pull_request:
+  sync_with_main:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v4
-        with:
-          ref: main
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Push to Main if Branch Changed
+      run: |
+        current_branch=$(git branch --show-current)
+        
+        if [ "$current_branch" != "main" ]; then
+          git push origin "$current_branch":main
+        fi
