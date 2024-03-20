@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdoxsuu_docs=self.webpackChunkdoxsuu_docs||[]).push([[3050],{6501:o=>{o.exports=JSON.parse('{"permalink":"/doxsuu.github.io/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

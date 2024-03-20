@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdoxsuu_docs=self.webpackChunkdoxsuu_docs||[]).push([[8946],{2860:s=>{s.exports=JSON.parse('{"label":"facebook","permalink":"/doxsuu.github.io/blog/tags/facebook","allTagsPath":"/doxsuu.github.io/blog/tags","count":1,"unlisted":false}')}}]);
