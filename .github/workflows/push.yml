@@ -1,0 +1,22 @@
+name: Push to test branch
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  copy_changes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push changes to test
+        run: |
+          git checkout test
+          git merge --allow-unrelated-histories main
+          git push origin test
