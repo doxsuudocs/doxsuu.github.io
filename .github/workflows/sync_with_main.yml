@@ -2,8 +2,7 @@ name: Update test branch
 
 on:
   push:
-    branches:
-      - test
+    branches: test
 
 jobs:
   pull-main-into-test:
