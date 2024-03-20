@@ -2,8 +2,6 @@ name: Sync and PR on new branch
 
 on:
   create:
-    branches:
-      - '*'
 
 jobs:
   sync_and_pr:
