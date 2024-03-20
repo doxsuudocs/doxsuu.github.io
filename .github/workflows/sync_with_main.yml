@@ -1,22 +1,32 @@
-name: Sync and PR on new branch
+name: Merge Dev to Main
 
-on:
-  push:
-    branches: 
-     - test
-    
-jobs:
-  sync_and_pr:
+on: # 발생 이벤트 타입
+  push: # push 이벤트 발생 시
+    branches: # 타겟 브랜치
+      - test
+
+jobs: # 실행 작업 코드
+  merge: # merge 실행
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout main branch # 'main' 브랜치로 branch checkout
         uses: actions/checkout@v2
         with:
-          ref: main
-          fetch-depth: 0
+          ref: 'main'
+          fetch-depth: '0'
 
-      - name: Push to new branch
+      - name: Configure Git # commit을 위한 git config 설정
         run: |
-          git checkout test
-          git merge main
-          git push origin test 
+          git config user.name doxsuu
+          git config user.email doxsuu@gmail.com
+
+      - name: Merge dev branch # main 브랜치에서 dev 브랜치를 merge
+        run: |
+          git merge origin/dev --no-edit
+
+      - name: Push changes to main branch # merge 내용들을 main 브랜치로 최종 push
+        uses: ad-m/github-push-action@master
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
