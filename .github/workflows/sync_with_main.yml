@@ -18,7 +18,7 @@ jobs:
       - name: Merge and push to test branch
         run: |
           git checkout test
-          git merge main
+          git merge main --allow-unrelated-histories
           git push origin test
 
       - name: Create Pull Request
