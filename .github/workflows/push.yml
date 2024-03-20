@@ -3,7 +3,7 @@ name: Push to test branch
 on:
   push:
     branches:
-      - '*'
+      - 'testz'
 
 jobs:
   copy_changes:
@@ -14,16 +14,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup git
+      - name: Push changes to test
         run: |
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "${{ github.actor }}"
           git checkout testz
           git merge --allow-unrelated-histories main
-
-      - name: Push changes to test
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: testz
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git testz
