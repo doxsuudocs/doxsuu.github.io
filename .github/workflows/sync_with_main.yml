@@ -16,6 +16,8 @@ jobs:
 
       - name: Merge main
         run: |
+          git config --global user.name "doxsuu"
+          git config --global user.email "doxsuu@gmail.com"
           git checkout main
           git pull
           git checkout test
