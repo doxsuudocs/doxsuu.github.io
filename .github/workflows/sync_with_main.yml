@@ -1,8 +1,9 @@
 name: Sync and PR on new branch
 
 on:
-  create:
-
+  push:
+    branches: test
+    
 jobs:
   sync_and_pr:
     runs-on: ubuntu-latest
@@ -13,18 +14,8 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Push to test branch
+      - name: Push to new branch
         run: |
           git checkout test
           git merge main
-          git push origin test
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          branch: test
-          title: 'Update test from main'
-          body: 'This PR was auto-generated to sync the main and test branches.'
-          draft: false
+          git push origin test 
