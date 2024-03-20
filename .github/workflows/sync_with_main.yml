@@ -1,10 +1,13 @@
-name: Sync and PR on new branch
+name: Sync and PR on push
 
 on:
-  create:
+  push:
+    branches-ignore:
+      - main
 
 jobs:
   sync_and_pr:
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
