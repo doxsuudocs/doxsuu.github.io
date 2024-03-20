@@ -1,0 +1,14 @@
+name: Pull Request Handler
+
+on:
+  push:
+    branches: '*'
+
+jobs:
+  create_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
