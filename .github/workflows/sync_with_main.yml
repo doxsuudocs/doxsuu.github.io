@@ -1,23 +1,25 @@
-name: Sync Branch with Main
+name: Sync Main with New Branch
 
 on:
   push:
-    branches-ignore:
-      - main # 메인 브랜치를 무시합니다.
+    branches:
+      - '*' # 모든 브랜치에 대해 실행됩니다.
+    paths-ignore:
+      - 'main' # 메인 브랜치의 푸시 이벤트를 무시합니다.
 
 jobs:
-  sync_with_main:
+  sync_main_with_new_branch:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Push to Main if Branch Changed
+    - name: Push Main to New Branch
       run: |
         # 현재 브랜치를 가져옵니다.
         current_branch=$(git branch --show-current)
         
-        # 가져온 브랜치가 main이 아니라면 main에 변경사항을 푸시합니다.
+        # 가져온 브랜치가 main이 아니라면 main의 변경사항을 푸시합니다.
         if [ "$current_branch" != "main" ]; then
-          git push origin "$current_branch":main
+          git push origin main:"$current_branch"
         fi
