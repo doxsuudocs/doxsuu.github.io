@@ -1,4 +1,4 @@
-name: "Create PR"
+name: "Create PR1"
 on: 
   push:
     branches: gh-pages
@@ -7,11 +7,11 @@ jobs:
   create-pr-on-push:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@1.0.0
+    - uses: actions/checkout@v4
     - name: Create pull request
       uses: peter-evans/create-pull-request@v6
       with:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        token: ${{ secrets.TOKEN }}
         branch: ${{ github.ref }}
         base: main
         title: 'Auto PR: ${{ github.actor }}'
