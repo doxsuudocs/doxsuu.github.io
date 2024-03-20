@@ -1,18 +1,12 @@
 name: "Create PR"
 on: 
   push:
-   branches: 
-     - '*'
+   branches-ignore: 
+     - 'main'
 jobs:
-  create-pr-on-push:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@1.0.0
-    - name: Create pull request
-      uses: thomaseizinger/create-pull-request@master
-      if: github.ref != 'refs/heads/main'
-      with:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        head: ${{ github.ref }}
-        base: main
-        title: 'Auto PR: ${{ github.actor }}'
+    - name: Run echo
+      run: echo "${{ github.ref }}"
