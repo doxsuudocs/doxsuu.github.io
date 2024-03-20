@@ -1,8 +1,8 @@
 name: "Create PR"
-on: 
+on:
   push:
-   branches: 
-     - '*'
+    branches:
+      - gh-pages
 jobs:
   build:
     runs-on: ubuntu-latest
