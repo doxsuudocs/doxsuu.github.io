@@ -1,17 +1,29 @@
-name: Merge any release branch to uat
+name: Merge to Test Branch
+
 on:
   push:
     branches:
-      - 'test'
+      - main
+      - 'test/*' # test 브랜치도 포함합니다.
+
 jobs:
-  merge-branch:
+  merge_to_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - name: Merge staging -> uat
-        uses: devmasx/merge-branch@master
+      - name: Checkout main branch
+        uses: actions/checkout@v2
         with:
-          type: now
-          target_branch: test
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+
+      - name: Create and checkout test branch
+        run: |
+          git checkout -b test
+          git push origin test
+        if: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Merge main into test
+        run: |
+          git fetch origin main
+          git merge --ff-only origin/main
+          git push origin test
+        if: ${{ github.ref == 'refs/heads/main' }}
