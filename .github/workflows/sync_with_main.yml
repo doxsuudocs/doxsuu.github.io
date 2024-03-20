@@ -1,19 +1,25 @@
-name: Sync Main with New Branch
+name: Sync Back to Develop
 
 on:
   push:
     branches:
-      - '*' # 모든 브랜치에 대해 실행됩니다.
-    paths-ignore:
-      - 'main' # 메인 브랜치의 푸시 이벤트를 무시합니다.
+      - '*'
 
 jobs:
-  sync_main_with_new_branch:
+  sync-branches:
     runs-on: ubuntu-latest
+    name: Syncing branches
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Push Main to New Branch
-      run: |
-        git push origin main:test
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Opening pull request
+        id: pull
+        uses: tretuna/sync-branches@1.2.0
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: 'main'
+          TO_BRANCH: 'test'
