@@ -19,5 +19,5 @@ jobs:
           git checkout main
           git pull
           git checkout test
-          git merge main
+          git merge main --allow-unrelated-histories
           git push
