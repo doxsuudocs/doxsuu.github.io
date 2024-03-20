@@ -24,7 +24,7 @@ jobs: # 실행 작업 코드
       - name: Merge dev branch # main 브랜치에서 dev 브랜치를 merge
         run: |
           git checkout -b temp-branch main
-          git merge test
+          git merge origin/test
           git checkout main
           git merge temp-branch
           git branch -d temp-branch
