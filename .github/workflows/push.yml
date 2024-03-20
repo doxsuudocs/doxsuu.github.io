@@ -2,8 +2,7 @@ name: Push to test branch
 
 on:
   push:
-    branches:
-      - '*'
+    branches: test
 
 jobs:
   copy_changes:
