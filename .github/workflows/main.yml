@@ -1,8 +1,6 @@
 name: "Create PR"
 on: 
   push:
-    branches-ignore:
-      - 'main'
 
 jobs:
   create-pr-on-push:
@@ -11,6 +9,7 @@ jobs:
     - uses: actions/checkout@1.0.0
     - name: Create pull request
       uses: thomaseizinger/create-pull-request@master
+      if: github.ref != 'refs/heads/main'
       with:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
         head: ${{ github.ref }}
