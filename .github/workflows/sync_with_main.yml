@@ -1,37 +1,32 @@
-name: Merge Dev to Main
+name: Sync and PR on push to test branch
 
-on: # 발생 이벤트 타입
-  push: # push 이벤트 발생 시
-    branches: # 타겟 브랜치
+on:
+  push:
+    branches:
       - '*'
 
-jobs: # 실행 작업 코드
-  merge: # merge 실행
+jobs:
+  sync_and_pr:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout main branch # 'main' 브랜치로 branch checkout
+      - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: 'main'
-          fetch-depth: '0'
+          ref: main
+          fetch-depth: 0
 
-      - name: Configure Git # commit을 위한 git config 설정
+      - name: Merge and push to test branch
         run: |
-          git config user.name doxsuu
-          git config user.email doxsuu@gmail.com
+          git checkout test
+          git merge main
+          git push origin test
 
-      - name: Merge dev branch # main 브랜치에서 dev 브랜치를 merge
-        run: |
-          git checkout -b temp-branch main
-          git merge origin/test
-          git checkout main
-          git merge temp-branch
-          git branch -d temp-branch
-
-
-      - name: Push changes to main branch # merge 내용들을 main 브랜치로 최종 push
-        uses: ad-m/github-push-action@master
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
         with:
-          branch: main
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: test
+          title: 'Update test from main'
+          body: 'This PR was auto-generated to sync the main and test branches.'
+          draft: false
