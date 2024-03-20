@@ -2,7 +2,8 @@ name: Update test branch
 
 on:
   push:
-    branches: test
+    branches: 
+      - '*'
 
 permissions:
   contents: write
