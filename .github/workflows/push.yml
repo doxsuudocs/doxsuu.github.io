@@ -3,7 +3,7 @@ name: Push to test branch
 on:
   push:
     branches:
-      - 'testz'
+      - '*'
 
 jobs:
   copy_changes:
