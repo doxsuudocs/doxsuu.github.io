@@ -14,4 +14,4 @@ jobs:
         token: ${{ secrets.TOKEN }}
         branch: ${{ github.ref }}
         base: main
-        title: 'Auto Pull Reqyest: ${{ github.actor }}'
+        title: 'Auto Pull Request: ${{ github.actor }}'
