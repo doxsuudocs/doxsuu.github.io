@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-<<<<<<< HEAD
-        <title>My Site123 Blog</title>
+        <title>My Site5 Blog</title>
         <link>https://doxsuudocs.github.io/doxsuu.github.io/blog</link>
-        <description>My Site123 Blog</description>
-=======
-        <title>My Site1234 Blog</title>
-        <link>https://doxsuudocs.github.io/doxsuu.github.io/blog</link>
-        <description>My Site1234 Blog</description>
->>>>>>> 65d0f476aa17917b1599586719439e7e74c9457f
+        <description>My Site5 Blog</description>
         <lastBuildDate>Thu, 26 Aug 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
