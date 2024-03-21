@@ -8,6 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Set git user
+      run: |
+        git config --global user.email "164181857+songinperth@users.noreply.github.com"
+        git config --global user.name "songinperth"
     - name: Create Pull Pequest
       uses: peter-evans/create-pull-request@v6
       with:
