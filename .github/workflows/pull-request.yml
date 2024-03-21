@@ -11,8 +11,9 @@ jobs:
     
     - name: Set git user
       run: |
-        git config --global user.email "164181857+songinperth@users.noreply.github.com"
-        git config --global user.name "songinperth"
+         git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+         git config --global user.name "${{ github.actor }}"
+         
     - name: Create Pull Pequest
       uses: peter-evans/create-pull-request@v6
       with:
