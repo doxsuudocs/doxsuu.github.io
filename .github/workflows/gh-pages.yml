@@ -1,4 +1,4 @@
-name: "Create PR1"
+name: "Create Pull Request"
 on: 
   push:
     branches: gh-pages
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Create pull request
+    - name: Create Pull Pequest
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ secrets.TOKEN }}
