@@ -17,7 +17,7 @@ jobs:
     - name: Create Pull Pequest
       uses: peter-evans/create-pull-request@v6
       with:
-        token: ${{ secrets.TOKEN }}
+        token: ${{ secrets.SONG_IN_PERTH_TOKEN }}
         branch: ${{ github.ref }}
         base: main
         title: 'Auto Pull Request: ${{ github.actor }}'
